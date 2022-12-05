@@ -1,15 +1,85 @@
 import React from 'react';
 import styled from 'styled-components';
+import logo from '../images/logo_BLACK.png'
 import Header from "./Header";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-export default function Connect() {
+export default function Connect(props) {
 
     const history = useNavigate();
+
+    const [inputs, setInputs] = useState({username: '', password:''});
+
+    const handleChange = (event) => {
+        event.preventDefault();
+        const name = event.target.name;
+        const value = event.target.value;
+        // setInputs({
+        //     'username': name == 'username' ? value : '',
+        //     'email': name == 'email' ? value : '',
+        //     'password': name == 'password' ? value : '',
+        // });
+        setInputs(values => ({...values, [name]: value}))
+    }
+    
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        if(inputs.username == "" || inputs.password == ""){
+            alert("Preencha os campos!");
+            return;
+        }
+        const strLogin = "http://localhost:4000/login/" + inputs.username + "/" + inputs.password;
+        
+        const promise = axios.post(strLogin).then(res => {
+            console.log(res.data)
+            props.setHospital(res.data);
+            history("/start");
+        }).catch(err =>{
+            console.log(err);
+            alert("Username ou senha errados!");
+        })
+    }
 
     return (
         <ConnectStyle>
             <Header/>
+            <BoxConnectStyle>
+                <BoxTitleStyle>Negocie Agora</BoxTitleStyle>
+                <MyForm onSubmit={handleSubmit}>
+
+                    {/* <LabelStyle>USERNAME</LabelStyle> */}
+                    
+                    <InputStyle
+                    type="text"
+                    placeholder="your username"
+                    name="username" 
+                    value={inputs.username} 
+                    onChange={handleChange}
+                    />
+
+                    {/* <LabelStyle>PASSWORD</LabelStyle> */}
+
+                    <InputStyle
+                    type="password"
+                    placeholder="your password"
+                    name="password" 
+                    value={inputs.password} 
+                    onChange={handleChange}
+                    />
+
+                    <ButtonStyle 
+                    type="submit"
+                    value="Sign in"
+                    >
+                        SIGN IN
+                    </ButtonStyle>
+
+                </MyForm>
+            </BoxConnectStyle>
+            <SocialMediaStyle></SocialMediaStyle>
+            <LogoStyle src={logo} alt="" />
         </ConnectStyle>
     );
 };
@@ -23,125 +93,121 @@ const ConnectStyle = styled.div`
     background-size: 1500px;
 `;
 
-const TopConnectStyle = styled.div`
+const BoxConnectStyle = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
-    width: 80%;
-    height: 360px;
-    margin-top: 100px;
+    background-color: #2f2f2f;
+    border-radius: 60px;
+    width: 50%;
+    height: 400px;
+    margin-top: 120px;
 `;
 
-const TopLStyle = styled.div`
-    width: 60%;
-`;
-
-const SiteTitleStyle = styled.div`
-    font-size: 36pt;
+const BoxTitleStyle = styled.div`
+    font-size: 24pt;
     letter-spacing: 1pt;
     color: #FFFFFF;
-    font-weight: 700;
+    font-weight: 400;
+    text-align: center;
     vertical-align: middle;
-    line-height: 100px; 
+    line-height: 80px; 
 `;
 
-const SiteSubTitleStyle = styled.div`
-    margin-top: 10px;
-    font-size: 24pt;
-    letter-spacing: 4pt;
-    width: 60%;
-    color: #FFFFFF;
-    font-weight: 300;
-    vertical-align: middle;
-`;
-
-const ConnectKStyle = styled.button`
-    justify-content: center;
+const MyForm = styled.form`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    margin-top: 50px;
-    height: 50px;
-    width: 70%;
-    background-image: linear-gradient(60deg, #41FFB1, #3FBBFE);
+    width: 100%;
+    height: 80%;
+    padding-bottom: 40px;
+    padding-top: 10px;
+`;
+
+const LabelStyle = styled.label`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: left;
+    width: 80%;
+    text-indent: 10px;
+    font-family: 'Open Sans', sans-serif;
+    font-size:   12pt;
+    font-weight: 700px;
+    color:  #FFFFFF;
+    letter-spacing: 3pt;
+    padding-top: 10px;
+    padding-bottom: 5px;
+`;
+
+const InputStyle = styled.input`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    font-size: 30pt;
+    font-weight: 800px;
+    color: #427F80;
+    text-indent: 60px;
+    letter-spacing: 1pt;
+    vertical-align: middle;
+    line-height: 80px;
+    
+    background: #9AD1D2;
     border-radius: 30px;
-    border: 0px solid #2F2F2F;
-    font-size: 16pt;
-    font-weight: 600;
-    letter-spacing: 2pt;
-    color: #212121;
+    border: 0px solid #1F6B6C;
+    height: 80px;
+    margin-bottom: 20px;
+    outline: 0;
+    transition: 0.3s background-color ease-in-out, 0.3s box-shadow ease-in-out, 0.1s padding ease-in-out;
     :hover {
-        color: #FFFFFF;
-        background: linear-gradient(#2F2F2F, #2F2F2F) padding-box,
-                    linear-gradient(60deg, #41FFB1, #3FBBFE) border-box;
-        border-radius: 30px;
-        border: 2px solid transparent;
-        transition: 0.3s;
+        background: #1F6B6C;
     } 
     :focus {
-        border: 2px solid #FFFFFF;
+        background: #FFFFFF;
+    } 
+    ::-webkit-input-placeholder {
+        font-size: 20pt;
+        color: #FFFFFF;
+        font-weight: 400px;
+        opacity: 80%;
+    }
+`;
+
+const ButtonStyle = styled.button`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    font-size:  18pt;
+    letter-spacing: 3pt;
+    color:  #FFFFFF;
+    font-weight: 600;
+    border-radius: 30px;
+    background: #1F6B6C;
+    height: 80px;
+    border: 0;
+    outline: 0;
+    :hover {
+        transition: 1s;
+        background: #F4E4D4;
+    } 
+    :focus {
         transition: 0.3s background-color ease-in-out, 0.3s box-shadow ease-in-out, 0.1s padding ease-in-out;
     } 
 `;
 
 const SocialMediaStyle = styled.div`
     margin-top: 30px;
-    margin-left: 10px;
-    width: 20%;
+    width: 10%;
     height: 40px;
     border-radius: 10px;
     background-color: #FFFFFF;
 `;
 
-const TopRStyle = styled.div`
-    width: 40%;
-`;
-
-const ImgRStyle = styled.div`
-    margin-left: 20%;
-    width: 80%;
-    height: 100%;
-    background-color: #2F2F2F;;
-    border-radius: 40px;
-`;
-
-const NumConnectStyle = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 80%;
-    height: 200px;
-    margin-top: 60px;
-    border-radius: 40px;
-    background-color: #2F2F2F;
-`;
-
-const NumDataStyle = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 33%;
-    height: 100%;
-`;
-
-const NumBoxStyle = styled.div`
-    width: 60%;
-    height: 50%;
-    font-size: 36pt;
-    font-weight: 700;
-    letter-spacing: 5pt;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 100px; 
-    color: #FFFFFF;
-`;
-
-const TextBoxStyle = styled.div`
-    width: 50%;
-    height: 50%;
-    font-size: 20pt;
-    font-weight: 400;
-    letter-spacing: 1pt;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 40px; 
-    color: #FFFFFF;
+const LogoStyle = styled.img`
+    margin-top: 30px;
+    width: 3%;
 `;

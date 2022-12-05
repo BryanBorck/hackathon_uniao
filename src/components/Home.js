@@ -100,6 +100,7 @@ const ConnectStyle = styled.button`
         border-radius: 30px;
         border: 2px solid transparent;
         transition: 0.3s;
+        cursor: pointer;
     } 
     :focus {
         border: 2px solid #FFFFFF;

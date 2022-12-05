@@ -15,8 +15,8 @@ const HeaderHome=(props) => {
                 <LogoStyle onClick={() => history("/")}>bioswap</LogoStyle>
                 <MenuStyle>
                     <ButtonStyle onClick={() => history("/")}>Home</ButtonStyle>
-                    <ButtonStyle onClick={() => history("/")}>Market</ButtonStyle>
-                    <ButtonStyle onClick={() => history("/")}>Contact</ButtonStyle>
+                    <ButtonStyle onClick={() => history("/market")}>Market</ButtonStyle>
+                    <ButtonStyle onClick={() => history("/transfer")}>Transfer</ButtonStyle>
                 </MenuStyle>
                 <ConnectStyle onClick={() => history("/connect")}>Conecte sua carteira</ConnectStyle>
                 {/* <LogoutStyle onClick={LogoutFunction}>Login/Logout</LogoutStyle> */}
@@ -59,6 +59,9 @@ const LogoStyle = styled.div`
     background: -webkit-linear-gradient(60deg, #41FFB1, #3FBBFE);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    :hover {
+        cursor: pointer;
+    }
 `;
 
 const LogoIMGStyle = styled.img`
@@ -66,6 +69,9 @@ const LogoIMGStyle = styled.img`
     left: 5%;
     margin-top: 12px;
     height: 36px;
+    :hover {
+        cursor: pointer;
+    }
 `;
 
 const MenuStyle = styled.div`
@@ -99,6 +105,7 @@ const ConnectStyle = styled.button`
         border-radius: 20px;
         border: 2px solid transparent;
         transition: 0.3s;
+        cursor: pointer;
     } 
     :focus {
         border: 2px solid #FFFFFF;
@@ -123,6 +130,7 @@ const ButtonStyle = styled.button`
     :hover {
         color: #212121;
         transition: 0.3s;
+        cursor: pointer;
     } 
     :focus {
         background: #212121;
