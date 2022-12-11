@@ -7,7 +7,7 @@ async function main() {
   await cbio.deployed();
 
   console.log(
-    `MedicalData deployed to ${cbio.address}`
+    `CBIO deployed to ${cbio.address}`
   );
 
   const EmissorCBIO = await hre.ethers.getContractFactory("EmissorCBIO");
