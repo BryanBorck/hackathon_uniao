@@ -1,6 +1,6 @@
 import React from "react";
 import styled from 'styled-components';
-import icon from '../images/leaf-icon-green.png'
+import icon from '../images/logo_TRANSPARENT.png'
 import { useLocation, useNavigate } from "react-router-dom";
 // import axios from "axios";
 
@@ -17,6 +17,7 @@ const HeaderHome=(props) => {
                     <ButtonStyle onClick={() => history("/")}>Home</ButtonStyle>
                     <ButtonStyle onClick={() => history("/market")}>Market</ButtonStyle>
                     <ButtonStyle onClick={() => history("/transfer")}>Transfer</ButtonStyle>
+                    <ButtonStyle onClick={() => history("/aposent")}>Aposentar</ButtonStyle>
                 </MenuStyle>
                 <ConnectStyle onClick={() => history("/connect")}>Conecte sua carteira</ConnectStyle>
                 {/* <LogoutStyle onClick={LogoutFunction}>Login/Logout</LogoutStyle> */}
@@ -36,8 +37,7 @@ export const Box = styled.div`
     height: 60px;
     width: 100%;
     min-width: 100px;
-    background: #2F2F2F;
-    opacity: 90%;
+    background: rgb(47, 47, 47, 0.9);
     flex-direction: row;
     bottom: 0;
     padding-left: 10%;
@@ -78,9 +78,9 @@ const MenuStyle = styled.div`
     display: flex;
     justify-content: space-between;
     position: fixed;
-    left: 35%;
+    left: 30%;
     height: 80px;
-    width: 40%;
+    width: 45%;
 `;
 
 const ConnectStyle = styled.button`
@@ -117,7 +117,7 @@ const ButtonStyle = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 35%;
+    width: 24%;
     height: 60px;
     background: transparent;
     border: 0px;

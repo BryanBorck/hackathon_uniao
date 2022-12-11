@@ -5,47 +5,33 @@ import Header from "./Header";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Select from "react-dropdown-select";
-import SocialFollow from "./SocialFollow"
 import bkg from '../images/layer_v1.png';
 
-export default function Connect(props) {
+export default function Aposent(props) {
 
     const history = useNavigate();
 
-    const [inputs, setInputs] = useState({inputdata: '', outputdata:''});
-
-    const [selected, setSelected] = useState("");
-  
-    const options = [
-        {key:'1', value:'Mobiles', disabled:true},
-        {key:'2', value:'Appliances'},
-        {key:'3', value:'Cameras'},
-        {key:'4', value:'Computers', disabled:true},
-        {key:'5', value:'Vegetables'},
-        {key:'6', value:'Diary Products'},
-        {key:'7', value:'Drinks'},
-    ]
+    const [inputs, setInputs] = useState({cust: '', code:'', valor:''});
 
     const handleChange = (event) => {
         event.preventDefault();
         const name = event.target.name;
         const value = event.target.value;
         // setInputs({
-        //     'inputdata': name == 'inputdata' ? value : '',
-        //     'email': name == 'email' ? value : '',
-        //     'outputdata': name == 'outputdata' ? value : '',
+        //     'nome': name == 'nome' ? value : '',
+        //     'cust': name == 'cust' ? value : '',
+        //     'valor': name == 'valor' ? value : '',
         // });
         setInputs(values => ({...values, [name]: value}))
     }
     
     const handleSubmit = (event) => {
         event.preventDefault();
-        if(inputs.inputdata == "" || inputs.outputdata == ""){
+        if(inputs.cust == "" || inputs.code == "" || inputs.valor == ""){
             alert("Preencha os campos!");
             return;
         }
-        const strLogin = "http://localhost:4000/login/" + inputs.inputdata + "/" + inputs.outputdata;
+        const strLogin = "http://localhost:4000/login/" + inputs.nome + "/" + inputs.valor;
         
         const promise = axios.post(strLogin).then(res => {
             console.log(res.data)
@@ -53,57 +39,81 @@ export default function Connect(props) {
             history("/start");
         }).catch(err =>{
             console.log(err);
-            alert("inputdata ou senha errados!");
+            alert("inputs errados!");
         })
     }
 
     return (
-        <ConnectStyle>
+        <AposentStyle>
             <Header/>
-            <BoxConnectStyle>
-                <BoxTitleStyle>Negocie Agora</BoxTitleStyle>
+            <BoxAposentStyle>
+                <BoxTitleStyle>Esteja dentro da lei, aposente seus cBios</BoxTitleStyle>
                 <MyForm onSubmit={handleSubmit}>
-
-                    {/* <LabelStyle>inputdata</LabelStyle> */}
                     
+                    {/* <BoxHorStyle>
+                        <InputMinorStyle
+                            type="text"
+                            onWheel={(e) => e.target.blur()}
+                            placeholder="Nome da empresa"
+                            name="nome" 
+                            value={inputs.nome} 
+                            onChange={handleChange}
+                        />
+
+                        <InputMinorStyle
+                            type="number"
+                            onWheel={(e) => e.target.blur()}
+                            placeholder="CNPJ"
+                            name="cnpj" 
+                            value={inputs.cnpj} 
+                            onChange={handleChange}
+                        />
+                    </BoxHorStyle> */}
+
                     <InputStyle
-                    type="number"
-                    onWheel={(e) => e.target.blur()}
-                    placeholder="Valor inputado"
-                    name="inputdata" 
-                    value={inputs.inputdata} 
-                    onChange={handleChange}
+                        type="text"
+                        onWheel={(e) => e.target.blur()}
+                        placeholder="Custodiante Associado"
+                        name="cust" 
+                        value={inputs.nome} 
+                        onChange={handleChange}
                     />
 
-                    {/* <Select options={options} onChange={(selected) => this.setSelected(selected)} /> */}
+                    <BoxHorStyle>
+                        <InputMinorStyle
+                            type="number"
+                            onWheel={(e) => e.target.blur()}
+                            placeholder="Código do cBio"
+                            name="code" 
+                            value={inputs.code} 
+                            onChange={handleChange}
+                        />
 
-                    {/* <LabelStyle>outputdata</LabelStyle> */}
-
-                    <InputStyle
-                    type="number"
-                    onWheel={(e) => e.target.blur()}
-                    placeholder="Resultado"
-                    name="outputdata" 
-                    value={inputs.outputdata} 
-                    onChange={handleChange}
-                    />
+                        <InputMinorStyle
+                            type="number"
+                            onWheel={(e) => e.target.blur()}
+                            placeholder="Quantidade de cBios"
+                            name="valor" 
+                            value={inputs.valor} 
+                            onChange={handleChange}
+                        />
+                    </BoxHorStyle>
 
                     <ButtonStyle 
                     type="submit"
                     value="Sign in"
                     >
-                        CONECTAR
+                        APOSENTAR cBios
                     </ButtonStyle>
 
                 </MyForm>
-            </BoxConnectStyle>
-            <SocialFollow />
+            </BoxAposentStyle>
             <LogoStyle src={logo} alt="" onClick={() => history("/")}/>
-        </ConnectStyle>
+        </AposentStyle>
     );
 };
 
-const ConnectStyle = styled.div`
+const AposentStyle = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -114,15 +124,15 @@ const ConnectStyle = styled.div`
     background-size: 1600px;
 `;
 
-const BoxConnectStyle = styled.div`
+const BoxAposentStyle = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     background: rgb(47, 47, 47, 0.7);
     border-radius: 60px;
-    width: 50%;
+    width: 70%;
     height: 400px;
-    margin-top: 120px;
+    margin-top: 150px;
 `;
 
 const BoxTitleStyle = styled.div`
@@ -143,23 +153,6 @@ const MyForm = styled.form`
     width: 100%;
     height: 80%;
     padding-bottom: 40px;
-    padding-top: 10px;
-`;
-
-const LabelStyle = styled.label`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: left;
-    width: 80%;
-    text-indent: 10px;
-    font-family: 'Open Sans', sans-serif;
-    font-size:   12pt;
-    font-weight: 700px;
-    color:  #FFFFFF;
-    letter-spacing: 3pt;
-    padding-top: 10px;
-    padding-bottom: 5px;
 `;
 
 const InputStyle = styled.input`
@@ -171,7 +164,54 @@ const InputStyle = styled.input`
     font-size: 24pt;
     font-weight: 800px;
     color: white;
-    text-indent: 60px;
+    text-indent: 40px;
+    letter-spacing: 1pt;
+    vertical-align: middle;
+    line-height: 40px;
+    
+    background: linear-gradient(#2A2A2A, #2A2A2A) padding-box,
+                linear-gradient(60deg, #41FFB1, #3FBBFE) border-box;
+    border: 2px solid transparent;
+    border-radius: 30px;
+    height: 80px;
+    margin-bottom: 20px;
+    outline: 0;
+    transition: 0.3s background-color ease-in-out, 0.3s box-shadow ease-in-out, 0.1s padding ease-in-out;
+    :hover {
+        background: linear-gradient(#2f2f2f, #2f2f2f) padding-box,
+                    linear-gradient(60deg, #41FFB1, #3FBBFE) border-box;
+        border: 2px solid transparent;
+    } 
+    ::-webkit-input-placeholder {
+        font-size: 20pt;
+        color: #FFFFFF;
+        font-weight: 300;
+        opacity: 50%;
+    }
+    ::-webkit-outer-spin-button,
+    ::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+`;
+
+const BoxHorStyle = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+`;
+
+const InputMinorStyle = styled.input`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 49%;
+    font-size: 24pt;
+    font-weight: 800px;
+    color: white;
+    text-indent: 40px;
     letter-spacing: 1pt;
     vertical-align: middle;
     line-height: 40px;
@@ -228,17 +268,9 @@ const ButtonStyle = styled.button`
     } 
 `;
 
-const SocialMediaStyle = styled.div`
-    margin-top: 30px;
-    width: 10%;
-    height: 40px;
-    border-radius: 10px;
-    background-color: #FFFFFF;
-`;
-
 const LogoStyle = styled.img`
     margin-top: 30px;
-    margin-bottom: 50px;
+    margin-bottom: 80px;
     width: 3%;
     :hover {
         cursor: pointer;

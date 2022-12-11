@@ -2,6 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
+import SocialFollow from "./SocialFollow"
+import bkg from '../images/layer_v1.png';
+import blk from '../images/photo_cover.png';
 
 export default function Home() {
 
@@ -10,31 +13,34 @@ export default function Home() {
     return (
         <HomeStyle>
             <Header/>
-                <TopHomeStyle>
-                    <TopLStyle>
-                        <SiteTitleStyle>Buy, trade and hold cBios</SiteTitleStyle>
-                        <SiteSubTitleStyle>Discover more and help the brazilian ecosystem</SiteSubTitleStyle>
-                        <ConnectStyle onClick={() => history("/connect")}>Conecte sua carteira</ConnectStyle>
-                        <SocialMediaStyle></SocialMediaStyle>
-                    </TopLStyle>
-                    <TopRStyle>
-                        <ImgRStyle></ImgRStyle>
-                    </TopRStyle>
-                </TopHomeStyle>
-                <NumHomeStyle>
-                    <NumDataStyle>
-                        <NumBoxStyle>10k+</NumBoxStyle>
-                        <TextBoxStyle>transações realizadas</TextBoxStyle>
-                    </NumDataStyle>
-                    <NumDataStyle>
-                        <NumBoxStyle>20M+</NumBoxStyle>
-                        <TextBoxStyle>de reais movimentados</TextBoxStyle>
-                    </NumDataStyle>
-                    <NumDataStyle>
-                        <NumBoxStyle>100+</NumBoxStyle>
-                        <TextBoxStyle>Stakeholders na plataforma</TextBoxStyle>
-                    </NumDataStyle>
-                </NumHomeStyle>
+            <TopHomeStyle>
+                <TopLStyle>
+                    <SiteTitleStyle>Buy, trade and hold cBios</SiteTitleStyle>
+                    <SiteSubTitleStyle>Discover more and help the brazilian ecosystem</SiteSubTitleStyle>
+                    <ConnectStyle onClick={() => history("/connect")}>Conecte sua carteira</ConnectStyle>
+                    <SocialFollow />
+                </TopLStyle>
+                <TopRStyle>
+                    <ImgRStyle></ImgRStyle>
+                    <PhotoStyle src={blk} alt="" />
+                </TopRStyle>
+            </TopHomeStyle>
+            <NumHomeStyle>
+                <NumDataStyle>
+                    <NumBoxStyle>10k+</NumBoxStyle>
+                    <TextBoxStyle>transações realizadas</TextBoxStyle>
+                </NumDataStyle>
+                <NumDataStyle>
+                    <NumBoxStyle>20M+</NumBoxStyle>
+                    <TextBoxStyle>de reais movimentados</TextBoxStyle>
+                </NumDataStyle>
+                <NumDataStyle>
+                    <NumBoxStyle>100+</NumBoxStyle>
+                    <TextBoxStyle>Stakeholders no app</TextBoxStyle>
+                </NumDataStyle>
+            </NumHomeStyle>
+            <MiddleHomeStyle></MiddleHomeStyle>
+            <BottomHomeStyle></BottomHomeStyle>
         </HomeStyle>
     );
 };
@@ -43,9 +49,11 @@ const HomeStyle = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background-image: url(${bkg});
+    height: 1550px;
+    background-size: 1600px;
     align-items: center;
     width: 100%;
-    background-size: 1500px;
 `;
 
 const TopHomeStyle = styled.div`
@@ -124,28 +132,38 @@ const TopRStyle = styled.div`
 const ImgRStyle = styled.div`
     margin-left: 20%;
     width: 80%;
-    height: 100%;
-    background-color: #2F2F2F;;
+    height: 30%;
     border-radius: 40px;
+`;
+
+const PhotoStyle = styled.img`
+    width: 100%;
 `;
 
 const NumHomeStyle = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 80%;
+    width: 75%;
     height: 200px;
-    margin-top: 60px;
     border-radius: 40px;
-    background-color: #2F2F2F;
+    margin-bottom: 20px;
+    margin-top: 20px;
 `;
 
 const NumDataStyle = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 33%;
+    width: 30%;
     height: 100%;
+    background-color: rgb(47, 47, 47, 0.3);
+    border-radius: 40px;
+    border: 4px solid #212121;
+    :hover {
+        transform: translateY(-10px);
+        transition: transform 600ms;
+    }
 `;
 
 const NumBoxStyle = styled.div`
@@ -161,7 +179,7 @@ const NumBoxStyle = styled.div`
 `;
 
 const TextBoxStyle = styled.div`
-    width: 50%;
+    width: 60%;
     height: 50%;
     font-size: 20pt;
     font-weight: 400;
@@ -170,4 +188,22 @@ const TextBoxStyle = styled.div`
     vertical-align: middle;
     line-height: 40px; 
     color: #FFFFFF;
+`;
+
+const MiddleHomeStyle = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-image: linear-gradient(60deg, #41FFB1, #3FBBFE);
+    width: 100%;
+    height: 440px;
+`;
+
+const BottomHomeStyle = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #212121;
+    width: 100%;
+    height: 320px;
 `;
