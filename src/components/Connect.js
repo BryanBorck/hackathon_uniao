@@ -6,6 +6,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Select from "react-dropdown-select";
+import SocialFollow from "./SocialFollow"
+import bkg from '../images/layer_v1.png';
 
 export default function Connect(props) {
 
@@ -95,7 +97,7 @@ export default function Connect(props) {
 
                 </MyForm>
             </BoxConnectStyle>
-            <SocialMediaStyle></SocialMediaStyle>
+            <SocialFollow />
             <LogoStyle src={logo} alt="" />
         </ConnectStyle>
     );
@@ -107,7 +109,9 @@ const ConnectStyle = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    background-size: 1500px;
+    background-image: url(${bkg});
+    height: 740px;
+    background-size: 1600px;
 `;
 
 const BoxConnectStyle = styled.div`
@@ -234,6 +238,9 @@ const SocialMediaStyle = styled.div`
 
 const LogoStyle = styled.img`
     margin-top: 30px;
+    margin-bottom: 50px;
     width: 3%;
+    :hover {
+        cursor: pointer;
+    }
 `;
-

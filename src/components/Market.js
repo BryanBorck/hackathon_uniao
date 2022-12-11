@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
+import bkg from '../images/layer_v1.png';
 
 export default function Market() {
 
@@ -21,7 +22,9 @@ const MarketStyle = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    background-size: 1500px;
+    background-image: url(${bkg});
+    height: 740px;
+    background-size: 1600px;
 `;
 
 const TopMarketStyle = styled.div`

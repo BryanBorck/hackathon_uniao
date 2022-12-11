@@ -5,12 +5,13 @@ import Header from "./Header";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import bkg from '../images/layer_v1.png';
 
 export default function Transfer(props) {
 
     const history = useNavigate();
 
-    const [inputs, setInputs] = useState({nome: '', cnpj: '', email: '', valor:''});
+    const [inputs, setInputs] = useState({nome: '', cnpj: '', email: '', code:'', valor:''});
 
     const handleChange = (event) => {
         event.preventDefault();
@@ -26,7 +27,7 @@ export default function Transfer(props) {
     
     const handleSubmit = (event) => {
         event.preventDefault();
-        if(inputs.nome == "" || inputs.cnpj == "" || inputs.email == "" || inputs.valor == ""){
+        if(inputs.nome == "" || inputs.cnpj == "" || inputs.email == "" || inputs.code == "" || inputs.valor == ""){
             alert("Preencha os campos!");
             return;
         }
@@ -49,23 +50,25 @@ export default function Transfer(props) {
                 <BoxTitleStyle>Transfira seus cBios para bioswap</BoxTitleStyle>
                 <MyForm onSubmit={handleSubmit}>
                     
-                    <InputStyle
-                        type="text"
-                        onWheel={(e) => e.target.blur()}
-                        placeholder="Nome da empresa"
-                        name="nome" 
-                        value={inputs.nome} 
-                        onChange={handleChange}
-                    />
+                    <BoxHorStyle>
+                        <InputMinorStyle
+                            type="text"
+                            onWheel={(e) => e.target.blur()}
+                            placeholder="Nome da empresa"
+                            name="nome" 
+                            value={inputs.nome} 
+                            onChange={handleChange}
+                        />
 
-                    <InputStyle
-                        type="number"
-                        onWheel={(e) => e.target.blur()}
-                        placeholder="CNPJ"
-                        name="cnpj" 
-                        value={inputs.cnpj} 
-                        onChange={handleChange}
-                    />
+                        <InputMinorStyle
+                            type="number"
+                            onWheel={(e) => e.target.blur()}
+                            placeholder="CNPJ"
+                            name="cnpj" 
+                            value={inputs.cnpj} 
+                            onChange={handleChange}
+                        />
+                    </BoxHorStyle>
 
                     <InputStyle
                         type="email"
@@ -76,14 +79,25 @@ export default function Transfer(props) {
                         onChange={handleChange}
                     />
 
-                    <InputStyle
-                        type="number"
-                        onWheel={(e) => e.target.blur()}
-                        placeholder="Valor de cBios"
-                        name="valor" 
-                        value={inputs.valor} 
-                        onChange={handleChange}
-                    />
+                    <BoxHorStyle>
+                        <InputMinorStyle
+                            type="number"
+                            onWheel={(e) => e.target.blur()}
+                            placeholder="Código do cBio"
+                            name="código" 
+                            value={inputs.code} 
+                            onChange={handleChange}
+                        />
+
+                        <InputMinorStyle
+                            type="number"
+                            onWheel={(e) => e.target.blur()}
+                            placeholder="Quantidade de cBios"
+                            name="valor" 
+                            value={inputs.valor} 
+                            onChange={handleChange}
+                        />
+                    </BoxHorStyle>
 
                     <ButtonStyle 
                     type="submit"
@@ -105,7 +119,9 @@ const TransferStyle = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    background-size: 1500px;
+    background-image: url(${bkg});
+    height: 740px;
+    background-size: 1600px;
 `;
 
 const BoxTransferStyle = styled.div`
@@ -148,7 +164,54 @@ const InputStyle = styled.input`
     font-size: 24pt;
     font-weight: 800px;
     color: white;
-    text-indent: 60px;
+    text-indent: 40px;
+    letter-spacing: 1pt;
+    vertical-align: middle;
+    line-height: 40px;
+    
+    background: linear-gradient(#2A2A2A, #2A2A2A) padding-box,
+                linear-gradient(60deg, #41FFB1, #3FBBFE) border-box;
+    border: 2px solid transparent;
+    border-radius: 30px;
+    height: 80px;
+    margin-bottom: 20px;
+    outline: 0;
+    transition: 0.3s background-color ease-in-out, 0.3s box-shadow ease-in-out, 0.1s padding ease-in-out;
+    :hover {
+        background: linear-gradient(#2f2f2f, #2f2f2f) padding-box,
+                    linear-gradient(60deg, #41FFB1, #3FBBFE) border-box;
+        border: 2px solid transparent;
+    } 
+    ::-webkit-input-placeholder {
+        font-size: 20pt;
+        color: #FFFFFF;
+        font-weight: 300;
+        opacity: 50%;
+    }
+    ::-webkit-outer-spin-button,
+    ::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+`;
+
+const BoxHorStyle = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+`;
+
+const InputMinorStyle = styled.input`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 49%;
+    font-size: 24pt;
+    font-weight: 800px;
+    color: white;
+    text-indent: 40px;
     letter-spacing: 1pt;
     vertical-align: middle;
     line-height: 40px;
@@ -207,6 +270,10 @@ const ButtonStyle = styled.button`
 
 const LogoStyle = styled.img`
     margin-top: 30px;
+    margin-bottom: 50px;
     width: 3%;
+    :hover {
+        cursor: pointer;
+    }
 `;
 

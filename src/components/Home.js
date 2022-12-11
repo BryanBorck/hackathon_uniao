@@ -1,8 +1,9 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
-import { bounce, bounceIn, bounceInLeft, bounceInUp, bounceOut, jello } from 'react-animations';
+import SocialFollow from "./SocialFollow"
+import bkg from '../images/layer_v1.png';
 
 export default function Home() {
 
@@ -11,44 +12,44 @@ export default function Home() {
     return (
         <HomeStyle>
             <Header/>
-                <TopHomeStyle>
-                    <TopLStyle>
-                        <SiteTitleStyle>Buy, trade and hold cBios</SiteTitleStyle>
-                        <SiteSubTitleStyle>Discover more and help the brazilian ecosystem</SiteSubTitleStyle>
-                        <ConnectStyle onClick={() => history("/connect")}>Conecte sua carteira</ConnectStyle>
-                        <SocialMediaStyle></SocialMediaStyle>
-                    </TopLStyle>
-                    <TopRStyle>
-                        <ImgRStyle></ImgRStyle>
-                    </TopRStyle>
-                </TopHomeStyle>
-                <NumHomeStyle>
-                    <NumDataStyle>
-                        <NumBoxStyle>10k+</NumBoxStyle>
-                        <TextBoxStyle>transações realizadas</TextBoxStyle>
-                    </NumDataStyle>
-                    <NumDataStyle>
-                        <NumBoxStyle>20M+</NumBoxStyle>
-                        <TextBoxStyle>de reais movimentados</TextBoxStyle>
-                    </NumDataStyle>
-                    <NumDataStyle>
-                        <NumBoxStyle>100+</NumBoxStyle>
-                        <TextBoxStyle>Stakeholders no app</TextBoxStyle>
-                    </NumDataStyle>
-                </NumHomeStyle>
+            <TopHomeStyle>
+                <TopLStyle>
+                    <SiteTitleStyle>Buy, trade and hold cBios</SiteTitleStyle>
+                    <SiteSubTitleStyle>Discover more and help the brazilian ecosystem</SiteSubTitleStyle>
+                    <ConnectStyle onClick={() => history("/connect")}>Conecte sua carteira</ConnectStyle>
+                    <SocialFollow />
+                </TopLStyle>
+                <TopRStyle>
+                    <ImgRStyle></ImgRStyle>
+                </TopRStyle>
+            </TopHomeStyle>
+            <NumHomeStyle>
+                <NumDataStyle>
+                    <NumBoxStyle>10k+</NumBoxStyle>
+                    <TextBoxStyle>transações realizadas</TextBoxStyle>
+                </NumDataStyle>
+                <NumDataStyle>
+                    <NumBoxStyle>20M+</NumBoxStyle>
+                    <TextBoxStyle>de reais movimentados</TextBoxStyle>
+                </NumDataStyle>
+                <NumDataStyle>
+                    <NumBoxStyle>100+</NumBoxStyle>
+                    <TextBoxStyle>Stakeholders no app</TextBoxStyle>
+                </NumDataStyle>
+            </NumHomeStyle>
         </HomeStyle>
     );
 };
-
-const bounceAnimation = keyframes`${bounce}`;
 
 const HomeStyle = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background-image: url(${bkg});
     align-items: center;
     width: 100%;
-    background-size: 1500px;
+    height: 740px;
+    background-size: 1600px;
 `;
 
 const TopHomeStyle = styled.div`
@@ -140,6 +141,7 @@ const NumHomeStyle = styled.div`
     height: 200px;
     margin-top: 60px;
     border-radius: 40px;
+    margin-bottom: 20px;
 `;
 
 const NumDataStyle = styled.div`
@@ -148,11 +150,12 @@ const NumDataStyle = styled.div`
     align-items: center;
     width: 30%;
     height: 100%;
-    background-color: #2F2F2F;
-    border-radius: 50px;
-    border: 1px solid white;
+    background-color: rgb(47, 47, 47, 0.3);
+    border-radius: 40px;
+    border: 4px solid #212121;
     :hover {
-        animation: 1s ${bounceAnimation};
+        transform: translateY(-10px);
+        transition: transform 600ms;
     }
 `;
 
