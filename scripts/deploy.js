@@ -17,6 +17,15 @@ async function main() {
   console.log(
     `EmissorCBIO deployed to ${emissorCBIO.address}`
   );
+
+  const RetirerCBIO = await hre.ethers.getContractFactory("RetirerCBIO");
+  const retirerCBIO = await RetirerCBIO.deploy(cbio.address);
+
+  await retirerCBIO.deployed();
+  console.log(
+    `RetirerCBIO deployed to ${retirerCBIO.address}`
+  );
+  
 }
 
 main().catch((error) => {
