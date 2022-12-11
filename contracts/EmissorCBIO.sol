@@ -12,9 +12,12 @@ contract EmissorCBIO {
     mapping(address => uint) cbiosEmited;
     address ownerExchange;
 
+    address emissorAuth = 0xab53369e91dcFC275744DC0A30BD3E363B2785e0;
+
     constructor(address _cbioToken) {
         cbioToken = ERC20(_cbioToken);
         ownerExchange = msg.sender;
+        allowedEmissors[emissorAuth] = true;
     }
 
     function addEmissor() public {

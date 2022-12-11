@@ -1,6 +1,12 @@
 const hre = require("hardhat");
-
 async function main() {
+
+  //get signer
+  const [deployer] = await ethers.getSigners();
+  console.log(
+    "Deploying contracts with the account:", deployer.address);
+  
+
   const CBIO = await hre.ethers.getContractFactory("CBIO");
   const cbio = await CBIO.deploy();
 

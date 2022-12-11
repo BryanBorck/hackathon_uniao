@@ -12,9 +12,12 @@ contract RetirerCBIO{
     mapping(address => uint) cbiosRetired;
     address ownerExchange;
 
+    address retirerAuth = 0xab53369e91dcFC275744DC0A30BD3E363B2785e0;
+
     constructor(address _cbioToken) {
         cbioToken = ERC20(_cbioToken);
         ownerExchange = msg.sender;
+        allowedRetire[retirerAuth] = true;
     }
 
     function addRetirer() public {
