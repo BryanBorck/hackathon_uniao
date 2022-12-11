@@ -1,48 +1,21 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
-import { bounce, bounceIn, bounceInLeft, bounceInUp, bounceOut, jello } from 'react-animations';
 
-export default function Home() {
+export default function Aposent() {
 
     const history = useNavigate();
 
     return (
-        <HomeStyle>
+        <AposentStyle>
             <Header/>
-                <TopHomeStyle>
-                    <TopLStyle>
-                        <SiteTitleStyle>Buy, trade and hold cBios</SiteTitleStyle>
-                        <SiteSubTitleStyle>Discover more and help the brazilian ecosystem</SiteSubTitleStyle>
-                        <ConnectStyle onClick={() => history("/connect")}>Conecte sua carteira</ConnectStyle>
-                        <SocialMediaStyle></SocialMediaStyle>
-                    </TopLStyle>
-                    <TopRStyle>
-                        <ImgRStyle></ImgRStyle>
-                    </TopRStyle>
-                </TopHomeStyle>
-                <NumHomeStyle>
-                    <NumDataStyle>
-                        <NumBoxStyle>10k+</NumBoxStyle>
-                        <TextBoxStyle>transações realizadas</TextBoxStyle>
-                    </NumDataStyle>
-                    <NumDataStyle>
-                        <NumBoxStyle>20M+</NumBoxStyle>
-                        <TextBoxStyle>de reais movimentados</TextBoxStyle>
-                    </NumDataStyle>
-                    <NumDataStyle>
-                        <NumBoxStyle>100+</NumBoxStyle>
-                        <TextBoxStyle>Stakeholders no app</TextBoxStyle>
-                    </NumDataStyle>
-                </NumHomeStyle>
-        </HomeStyle>
+            <TopAposentStyle>APOSENTAR</TopAposentStyle>
+        </AposentStyle>
     );
 };
 
-const bounceAnimation = keyframes`${bounce}`;
-
-const HomeStyle = styled.div`
+const AposentStyle = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -51,10 +24,11 @@ const HomeStyle = styled.div`
     background-size: 1500px;
 `;
 
-const TopHomeStyle = styled.div`
+const TopAposentStyle = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    color: white;
     width: 80%;
     height: 360px;
     margin-top: 100px;
@@ -83,7 +57,7 @@ const SiteSubTitleStyle = styled.div`
     vertical-align: middle;
 `;
 
-const ConnectStyle = styled.button`
+const AposentKStyle = styled.button`
     justify-content: center;
     align-items: center;
     margin-top: 50px;
@@ -103,7 +77,6 @@ const ConnectStyle = styled.button`
         border-radius: 30px;
         border: 2px solid transparent;
         transition: 0.3s;
-        cursor: pointer;
     } 
     :focus {
         border: 2px solid #FFFFFF;
@@ -132,28 +105,23 @@ const ImgRStyle = styled.div`
     border-radius: 40px;
 `;
 
-const NumHomeStyle = styled.div`
+const NumAposentStyle = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 75%;
+    width: 80%;
     height: 200px;
     margin-top: 60px;
     border-radius: 40px;
+    background-color: #2F2F2F;
 `;
 
 const NumDataStyle = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 30%;
+    width: 33%;
     height: 100%;
-    background-color: #2F2F2F;
-    border-radius: 50px;
-    border: 1px solid white;
-    :hover {
-        animation: 1s ${bounceAnimation};
-    }
 `;
 
 const NumBoxStyle = styled.div`
@@ -169,7 +137,7 @@ const NumBoxStyle = styled.div`
 `;
 
 const TextBoxStyle = styled.div`
-    width: 60%;
+    width: 50%;
     height: 50%;
     font-size: 20pt;
     font-weight: 400;

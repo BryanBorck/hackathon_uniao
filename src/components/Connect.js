@@ -1,36 +1,49 @@
 import React from 'react';
 import styled from 'styled-components';
-import logo from '../images/logo_BLACK.png'
+import logo from '../images/logo_TRANSPARENT.png'
 import Header from "./Header";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Select from "react-dropdown-select";
 
 export default function Connect(props) {
 
     const history = useNavigate();
 
-    const [inputs, setInputs] = useState({username: '', password:''});
+    const [inputs, setInputs] = useState({inputdata: '', outputdata:''});
+
+    const [selected, setSelected] = useState("");
+  
+    const options = [
+        {key:'1', value:'Mobiles', disabled:true},
+        {key:'2', value:'Appliances'},
+        {key:'3', value:'Cameras'},
+        {key:'4', value:'Computers', disabled:true},
+        {key:'5', value:'Vegetables'},
+        {key:'6', value:'Diary Products'},
+        {key:'7', value:'Drinks'},
+    ]
 
     const handleChange = (event) => {
         event.preventDefault();
         const name = event.target.name;
         const value = event.target.value;
         // setInputs({
-        //     'username': name == 'username' ? value : '',
+        //     'inputdata': name == 'inputdata' ? value : '',
         //     'email': name == 'email' ? value : '',
-        //     'password': name == 'password' ? value : '',
+        //     'outputdata': name == 'outputdata' ? value : '',
         // });
         setInputs(values => ({...values, [name]: value}))
     }
     
     const handleSubmit = (event) => {
         event.preventDefault();
-        if(inputs.username == "" || inputs.password == ""){
+        if(inputs.inputdata == "" || inputs.outputdata == ""){
             alert("Preencha os campos!");
             return;
         }
-        const strLogin = "http://localhost:4000/login/" + inputs.username + "/" + inputs.password;
+        const strLogin = "http://localhost:4000/login/" + inputs.inputdata + "/" + inputs.outputdata;
         
         const promise = axios.post(strLogin).then(res => {
             console.log(res.data)
@@ -38,7 +51,7 @@ export default function Connect(props) {
             history("/start");
         }).catch(err =>{
             console.log(err);
-            alert("Username ou senha errados!");
+            alert("inputdata ou senha errados!");
         })
     }
 
@@ -49,23 +62,27 @@ export default function Connect(props) {
                 <BoxTitleStyle>Negocie Agora</BoxTitleStyle>
                 <MyForm onSubmit={handleSubmit}>
 
-                    {/* <LabelStyle>USERNAME</LabelStyle> */}
+                    {/* <LabelStyle>inputdata</LabelStyle> */}
                     
                     <InputStyle
-                    type="text"
-                    placeholder="your username"
-                    name="username" 
-                    value={inputs.username} 
+                    type="number"
+                    onWheel={(e) => e.target.blur()}
+                    placeholder="valor inputado"
+                    name="inputdata" 
+                    value={inputs.inputdata} 
                     onChange={handleChange}
                     />
 
-                    {/* <LabelStyle>PASSWORD</LabelStyle> */}
+                    {/* <Select options={options} onChange={(selected) => this.setSelected(selected)} /> */}
+
+                    {/* <LabelStyle>outputdata</LabelStyle> */}
 
                     <InputStyle
-                    type="password"
-                    placeholder="your password"
-                    name="password" 
-                    value={inputs.password} 
+                    type="number"
+                    onWheel={(e) => e.target.blur()}
+                    placeholder="resultado"
+                    name="outputdata" 
+                    value={inputs.outputdata} 
                     onChange={handleChange}
                     />
 
@@ -73,7 +90,7 @@ export default function Connect(props) {
                     type="submit"
                     value="Sign in"
                     >
-                        SIGN IN
+                        CONECTAR
                     </ButtonStyle>
 
                 </MyForm>
@@ -147,32 +164,37 @@ const InputStyle = styled.input`
     justify-content: space-between;
     align-items: center;
     width: 90%;
-    font-size: 30pt;
+    font-size: 24pt;
     font-weight: 800px;
-    color: #427F80;
+    color: white;
     text-indent: 60px;
     letter-spacing: 1pt;
     vertical-align: middle;
-    line-height: 80px;
+    line-height: 40px;
     
-    background: #9AD1D2;
+    background: linear-gradient(#2A2A2A, #2A2A2A) padding-box,
+                linear-gradient(60deg, #41FFB1, #3FBBFE) border-box;
+    border: 2px solid transparent;
     border-radius: 30px;
-    border: 0px solid #1F6B6C;
     height: 80px;
     margin-bottom: 20px;
     outline: 0;
     transition: 0.3s background-color ease-in-out, 0.3s box-shadow ease-in-out, 0.1s padding ease-in-out;
     :hover {
-        background: #1F6B6C;
-    } 
-    :focus {
-        background: #FFFFFF;
+        background: linear-gradient(#2f2f2f, #2f2f2f) padding-box,
+                    linear-gradient(60deg, #41FFB1, #3FBBFE) border-box;
+        border: 2px solid transparent;
     } 
     ::-webkit-input-placeholder {
         font-size: 20pt;
         color: #FFFFFF;
-        font-weight: 400px;
-        opacity: 80%;
+        font-weight: 300;
+        opacity: 50%;
+    }
+    ::-webkit-outer-spin-button,
+    ::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
     }
 `;
 
@@ -181,20 +203,23 @@ const ButtonStyle = styled.button`
     justify-content: center;
     align-items: center;
     width: 90%;
-    font-size:  18pt;
-    letter-spacing: 3pt;
-    color:  #FFFFFF;
-    font-weight: 600;
-    border-radius: 30px;
-    background: #1F6B6C;
     height: 80px;
-    border: 0;
-    outline: 0;
+    background-image: linear-gradient(60deg, #41FFB1, #3FBBFE);
+    border-radius: 30px;
+    border: 0px solid #2F2F2F;
+    font-size: 18pt;
+    font-weight: 600;
+    color: #212121;
     :hover {
-        transition: 1s;
-        background: #F4E4D4;
+        color: #FFFFFF;
+        background: linear-gradient(#2F2F2F, #2F2F2F) padding-box,
+                    linear-gradient(60deg, #41FFB1, #3FBBFE) border-box;
+        border: 2px solid transparent;
+        transition: 0.3s;
+        cursor: pointer;
     } 
     :focus {
+        border: 2px solid #FFFFFF;
         transition: 0.3s background-color ease-in-out, 0.3s box-shadow ease-in-out, 0.1s padding ease-in-out;
     } 
 `;
@@ -211,3 +236,4 @@ const LogoStyle = styled.img`
     margin-top: 30px;
     width: 3%;
 `;
+
