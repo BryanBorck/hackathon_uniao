@@ -4,6 +4,7 @@ import Header from "./Header";
 import { useNavigate } from "react-router-dom";
 import SocialFollow from "./SocialFollow"
 import bkg from '../images/layer_v1.png';
+import blk from '../images/photo_cover.png';
 
 export default function Home() {
 
@@ -21,6 +22,7 @@ export default function Home() {
                 </TopLStyle>
                 <TopRStyle>
                     <ImgRStyle></ImgRStyle>
+                    <PhotoStyle src={blk} alt="" />
                 </TopRStyle>
             </TopHomeStyle>
             <NumHomeStyle>
@@ -37,6 +39,8 @@ export default function Home() {
                     <TextBoxStyle>Stakeholders no app</TextBoxStyle>
                 </NumDataStyle>
             </NumHomeStyle>
+            <MiddleHomeStyle></MiddleHomeStyle>
+            <BottomHomeStyle></BottomHomeStyle>
         </HomeStyle>
     );
 };
@@ -46,10 +50,10 @@ const HomeStyle = styled.div`
     flex-direction: column;
     justify-content: space-between;
     background-image: url(${bkg});
+    height: 1550px;
+    background-size: 1600px;
     align-items: center;
     width: 100%;
-    height: 740px;
-    background-size: 1600px;
 `;
 
 const TopHomeStyle = styled.div`
@@ -128,9 +132,12 @@ const TopRStyle = styled.div`
 const ImgRStyle = styled.div`
     margin-left: 20%;
     width: 80%;
-    height: 100%;
-    background-color: #2F2F2F;;
+    height: 30%;
     border-radius: 40px;
+`;
+
+const PhotoStyle = styled.img`
+    width: 100%;
 `;
 
 const NumHomeStyle = styled.div`
@@ -139,9 +146,9 @@ const NumHomeStyle = styled.div`
     justify-content: space-between;
     width: 75%;
     height: 200px;
-    margin-top: 60px;
     border-radius: 40px;
     margin-bottom: 20px;
+    margin-top: 20px;
 `;
 
 const NumDataStyle = styled.div`
@@ -181,4 +188,22 @@ const TextBoxStyle = styled.div`
     vertical-align: middle;
     line-height: 40px; 
     color: #FFFFFF;
+`;
+
+const MiddleHomeStyle = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-image: linear-gradient(60deg, #41FFB1, #3FBBFE);
+    width: 100%;
+    height: 440px;
+`;
+
+const BottomHomeStyle = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #212121;
+    width: 100%;
+    height: 320px;
 `;

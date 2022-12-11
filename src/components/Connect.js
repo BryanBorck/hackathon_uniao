@@ -98,7 +98,7 @@ export default function Connect(props) {
                 </MyForm>
             </BoxConnectStyle>
             <SocialFollow />
-            <LogoStyle src={logo} alt="" />
+            <LogoStyle src={logo} alt="" onClick={() => history("/")}/>
         </ConnectStyle>
     );
 };

@@ -37,7 +37,7 @@ export const Box = styled.div`
     height: 60px;
     width: 100%;
     min-width: 100px;
-    background: rgb(47, 47, 47, 0.3);
+    background: rgb(47, 47, 47, 0.9);
     flex-direction: row;
     bottom: 0;
     padding-left: 10%;

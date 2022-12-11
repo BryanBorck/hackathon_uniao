@@ -108,7 +108,7 @@ export default function Transfer(props) {
 
                 </MyForm>
             </BoxTransferStyle>
-            <LogoStyle src={logo} alt="" />
+            <LogoStyle src={logo} alt="" onClick={() => history("/")}/>
         </TransferStyle>
     );
 };
