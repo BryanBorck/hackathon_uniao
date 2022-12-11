@@ -69,7 +69,7 @@ export default function Connect(props) {
                     <InputStyle
                     type="number"
                     onWheel={(e) => e.target.blur()}
-                    placeholder="valor inputado"
+                    placeholder="Valor inputado"
                     name="inputdata" 
                     value={inputs.inputdata} 
                     onChange={handleChange}
@@ -82,7 +82,7 @@ export default function Connect(props) {
                     <InputStyle
                     type="number"
                     onWheel={(e) => e.target.blur()}
-                    placeholder="resultado"
+                    placeholder="Resultado"
                     name="outputdata" 
                     value={inputs.outputdata} 
                     onChange={handleChange}
@@ -118,7 +118,7 @@ const BoxConnectStyle = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: #2f2f2f;
+    background: rgb(47, 47, 47, 0.7);
     border-radius: 60px;
     width: 50%;
     height: 400px;

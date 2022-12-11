@@ -75,7 +75,7 @@ export default function Transfer(props) {
                         onWheel={(e) => e.target.blur()}
                         placeholder="Email"
                         name="email" 
-                        value={inputs.valor} 
+                        value={inputs.email} 
                         onChange={handleChange}
                     />
 
@@ -84,7 +84,7 @@ export default function Transfer(props) {
                             type="number"
                             onWheel={(e) => e.target.blur()}
                             placeholder="Código do cBio"
-                            name="código" 
+                            name="code" 
                             value={inputs.code} 
                             onChange={handleChange}
                         />
@@ -128,7 +128,7 @@ const BoxTransferStyle = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: #2f2f2f;
+    background: rgb(47, 47, 47, 0.7);
     border-radius: 60px;
     width: 70%;
     height: 520px;

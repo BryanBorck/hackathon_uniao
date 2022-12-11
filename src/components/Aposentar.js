@@ -75,7 +75,7 @@ export default function Aposent(props) {
                         onWheel={(e) => e.target.blur()}
                         placeholder="Custodiante Associado"
                         name="cust" 
-                        value={inputs.valor} 
+                        value={inputs.nome} 
                         onChange={handleChange}
                     />
 
@@ -84,7 +84,7 @@ export default function Aposent(props) {
                             type="number"
                             onWheel={(e) => e.target.blur()}
                             placeholder="Código do cBio"
-                            name="código" 
+                            name="code" 
                             value={inputs.code} 
                             onChange={handleChange}
                         />
@@ -128,7 +128,7 @@ const BoxAposentStyle = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: #2f2f2f;
+    background: rgb(47, 47, 47, 0.7);
     border-radius: 60px;
     width: 70%;
     height: 400px;
