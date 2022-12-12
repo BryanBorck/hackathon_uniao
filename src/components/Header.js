@@ -1,13 +1,28 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from 'styled-components';
 import icon from '../images/logo_TRANSPARENT.png'
 import { useLocation, useNavigate } from "react-router-dom";
+import Web3Context from "../contexts/Web3Context";
+import { connectToMetamask } from "./utilsWeb3";
 // import axios from "axios";
 
 const HeaderHome=(props) => {
-
+    const {signer, provider, address, setSigner, setProvider, setAddress} = useContext(Web3Context);
     const location = useLocation();
     const history = useNavigate();
+
+    async function handleConnect(){
+        
+        const [signerMeta, providerMeta, addressMeta] = await connectToMetamask();
+        setProvider(providerMeta);
+        setAddress(addressMeta);
+        setSigner(signerMeta);
+
+    }
+
+    function betterAdress(addressStr){
+        return addressStr.substr(0, 6) + "..." + addressStr.substr(addressStr.length - 4, addressStr.length);
+    }
     
         return (
             <Box>
@@ -19,7 +34,9 @@ const HeaderHome=(props) => {
                     <ButtonStyle onClick={() => history("/transfer")}>Transfer</ButtonStyle>
                     <ButtonStyle onClick={() => history("/aposent")}>Aposentar</ButtonStyle>
                 </MenuStyle>
-                <ConnectStyle onClick={() => history("/connect")}>Conecte sua carteira</ConnectStyle>
+                <ConnectStyle onClick={handleConnect}>
+                    {address == "" ? "Conecte sua carteira": betterAdress(address)}
+                    </ConnectStyle>
                 {/* <LogoutStyle onClick={LogoutFunction}>Login/Logout</LogoutStyle> */}
             </Box>
     );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import logo from '../images/logo_TRANSPARENT.png'
 import Header from "./Header";
@@ -6,12 +6,17 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import bkg from '../images/layer_v1.png';
+import Web3Context from '../contexts/Web3Context';
+import {ethers} from 'ethers';
 
 export default function Transfer(props) {
 
     const history = useNavigate();
 
     const [inputs, setInputs] = useState({nome: '', cnpj: '', email: '', code:'', valor:''});
+
+    const {address, signer, EmissorCBIOAddress, EmissorCBIOABI} = useContext(Web3Context);
+    //get instance of contract for ABI  and address
 
     const handleChange = (event) => {
         event.preventDefault();
@@ -24,30 +29,36 @@ export default function Transfer(props) {
         // });
         setInputs(values => ({...values, [name]: value}))
     }
-    
-    const handleSubmit = (event) => {
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
         if(inputs.nome == "" || inputs.cnpj == "" || inputs.email == "" || inputs.code == "" || inputs.valor == ""){
             alert("Preencha os campos!");
             return;
         }
-        const strLogin = "http://localhost:4000/login/" + inputs.nome + "/" + inputs.valor;
-        
-        const promise = axios.post(strLogin).then(res => {
-            console.log(res.data)
-            props.setHospital(res.data);
-            history("/start");
-        }).catch(err =>{
+        const amount = parseInt(inputs.valor);
+        if(amount <= 0){
+            alert("Valor inválido!");
+            return;
+        }
+        try{
+            const emitContract = new ethers.Contract(EmissorCBIOAddress, EmissorCBIOABI, signer);
+            const tx = await emitContract.functions.emitirCBIO(address, amount);
+            await tx.wait();
+            alert("CBIO emitido com sucesso!");
+        }catch(err){
             console.log(err);
-            alert("inputs errados!");
-        })
+            alert("Erro ao emitir CBIO!");
+        }
+        
+
     }
 
     return (
         <TransferStyle>
             <Header/>
             <BoxTransferStyle>
-                <BoxTitleStyle>Transfira seus cBios para bioswap</BoxTitleStyle>
+                <BoxTitleStyle>Emita CBIOS pela bioswap</BoxTitleStyle>
                 <MyForm onSubmit={handleSubmit}>
                     
                     <BoxHorStyle>
@@ -103,7 +114,7 @@ export default function Transfer(props) {
                     type="submit"
                     value="Sign in"
                     >
-                        TRANSFERIR
+                        EMITIR
                     </ButtonStyle>
 
                 </MyForm>
